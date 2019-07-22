@@ -15,9 +15,9 @@ public class Main {
         readTask();
 
         if (!inputString.equals("")) {
-            performTask();
+            taskPerformer.performTask(stringHandler.getArguments(inputString));
         } else {
-            // Вывод helper
+            taskPerformer.printHelpMessage();
         }
     }
 
@@ -28,9 +28,5 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private static void performTask(){
-        taskPerformer.performTask(stringHandler.getArguments(inputString));
     }
 }

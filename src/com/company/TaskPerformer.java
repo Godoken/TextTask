@@ -7,20 +7,16 @@ public class TaskPerformer {
 
     public void performTask(ArrayList<String> arguments) {
         switch (arguments.get(0)) {
-            case "byName":
+            case "--name":
                 printFilesByName(arguments.get(1), arguments.get(2));
                 break;
 
-            case "byData":
-                // Поиск по данным
-                break;
-
-            case "help":
-                // Помощь
+            case "--data":
+                printFilesByData(arguments.get(1), arguments.get(2));
                 break;
 
             default:
-                System.out.println("Неверные аргументы");
+                printHelpMessage();
                 break;
         }
     }
@@ -47,11 +43,10 @@ public class TaskPerformer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return listFile;
     }
 
-    private void printFilesData(String directoryName, String data) {
+    private void printFilesByData(String directoryName, String data) {
         ArrayList<String> listFile = findFilesByData(directoryName, data);
         if (listFile.size() != 0){
             for (int i = 0; i < listFile.size(); i++) {
@@ -72,7 +67,16 @@ public class TaskPerformer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return listFile;
+    }
+
+    public void printHelpMessage(){
+        System.out.println("Чтобы найти файлы в директории по имени файла:"
+                + "\n" +
+                "java -jar TestTask.jar --name {example_file_name} {example_directory_name}" + "\n");
+
+        System.out.println("Чтобы найти файлы в директории по содержимому файла:"
+                + "\n" +
+                "java -jar TestTask.jar --data {example_file_data} {example_directory_name}" + "\n");
     }
 }
