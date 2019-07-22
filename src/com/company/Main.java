@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
-
     private static StringHandler stringHandler = new StringHandler();
     private static TaskPerformer taskPerformer = new TaskPerformer();
 

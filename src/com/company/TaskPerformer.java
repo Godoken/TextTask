@@ -3,9 +3,9 @@ package com.company;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class TaskPerformer {
+class TaskPerformer {
 
-    public void performTask(ArrayList<String> arguments) {
+    void performTask(ArrayList<String> arguments) {
         switch (arguments.get(0)) {
             case "--name":
                 printFilesByName(arguments.get(1), arguments.get(2));
@@ -25,8 +25,8 @@ public class TaskPerformer {
     private void printFilesByName(String directoryName, String fileName) {
         ArrayList<String> listFile = findFilesByName(directoryName, fileName);
         if (listFile.size() != 0){
-            for (int i = 0; i < listFile.size(); i++) {
-                System.out.println(listFile.get(i));
+            for (String s : listFile) {
+                System.out.println(s);
             }
         } else {
             System.out.println("Не найдено");
@@ -34,7 +34,7 @@ public class TaskPerformer {
     }
 
     private ArrayList<String> findFilesByName(String directoryName, String fileName) {
-        FileFinder fileFinder  = new FileFinder();
+        FileFinder fileFinder = new FileFinder();
         ArrayList<String> listArgument = new ArrayList<>();
         ArrayList<String> listFile = new ArrayList<>();
 
@@ -49,8 +49,8 @@ public class TaskPerformer {
     private void printFilesByData(String directoryName, String data) {
         ArrayList<String> listFile = findFilesByData(directoryName, data);
         if (listFile.size() != 0){
-            for (int i = 0; i < listFile.size(); i++) {
-                System.out.println(listFile.get(i));
+            for (String s : listFile) {
+                System.out.println(s);
             }
         } else {
             System.out.println("Не найдено");
@@ -70,13 +70,13 @@ public class TaskPerformer {
         return listFile;
     }
 
-    public void printHelpMessage(){
+    void printHelpMessage(){
         System.out.println("Чтобы найти файлы в директории по имени файла:"
                 + "\n" +
-                "java -jar TestTask.jar --name {example_file_name} {example_directory_name}" + "\n");
+                "--name {example_file_name} {example_directory_name}" + "\n");
 
         System.out.println("Чтобы найти файлы в директории по содержимому файла:"
                 + "\n" +
-                "java -jar TestTask.jar --data {example_file_data} {example_directory_name}" + "\n");
+                "--data {example_file_data} {example_directory_name}" + "\n");
     }
 }
