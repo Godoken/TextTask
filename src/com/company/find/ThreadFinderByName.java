@@ -2,27 +2,26 @@ package com.company.find;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class ThreadFinderByName extends Thread {
     private String path;
-    private ArrayList<String> res;
+    private List<String> res;
     private String name;
 
-    void setArguments(String path, ArrayList<String> res, String name) {
+    void setArguments(String path, List<String> res, String name) {
         this.path = path;
         this.res = res;
         this.name = name;
     }
 
-    ArrayList<String> getRes() {
+    List<String> getRes() {
         return res;
     }
 
     public void run() {
         File dir = new File(path);
         File[] list = dir.listFiles();
-        ThreadFinderByName threadFinderByName = new ThreadFinderByName();
 
         if (list != null){
             for (File file : list) {
@@ -38,19 +37,13 @@ public class ThreadFinderByName extends Thread {
                     }
                 } else {
                     try {
+                        ThreadFinderByName threadFinderByName = new ThreadFinderByName();
                         threadFinderByName.setArguments(file.getCanonicalPath(), res, name);
-                        threadFinderByName.run();
+                        threadFinderByName.start();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
-            }
-        }
-        if (threadFinderByName.isAlive()) {
-            try {
-                threadFinderByName.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
         }
     }

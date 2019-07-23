@@ -3,6 +3,8 @@ package com.company;
 import com.company.find.FileFinder;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 class TaskPerformer {
     void performTask(ArrayList<String> arguments) {
@@ -20,36 +22,40 @@ class TaskPerformer {
     }
 
     private void printFilesByName(String directoryName, String fileName) {
-        ArrayList<String> listFile = findFilesByName(directoryName, fileName);
+        List<String> listFile = findFilesByName(directoryName, fileName);
         if (listFile.size() != 0){
-            for (String s : listFile) {
-                System.out.println(s);
+            synchronized (listFile) {
+                for (String s : listFile) {
+                    System.out.println(s);
+                }
             }
         } else {
             System.out.println("Не найдено");
         }
     }
 
-    private ArrayList<String> findFilesByName(String directoryName, String fileName) {
+    private List<String> findFilesByName(String directoryName, String fileName) {
         FileFinder fileFinder = new FileFinder();
-        ArrayList<String> listArgument = new ArrayList<>();
+        List<String> listArgument = Collections.synchronizedList(new ArrayList<>());
         return fileFinder.getListByName(directoryName, listArgument, fileName);
     }
 
     private void printFilesByData(String directoryName, String data) {
-        ArrayList<String> listFile = findFilesByData(directoryName, data);
+        List<String> listFile = findFilesByData(directoryName, data);
         if (listFile.size() != 0){
-            for (String s : listFile) {
-                System.out.println(s);
+            synchronized (listFile) {
+                for (String s : listFile) {
+                    System.out.println(s);
+                }
             }
         } else {
             System.out.println("Не найдено");
         }
     }
 
-    private ArrayList<String> findFilesByData(String directoryName, String data) {
+    private List<String> findFilesByData(String directoryName, String data) {
         FileFinder fileFinder  = new FileFinder();
-        ArrayList<String> listArgument = new ArrayList<>();
+        List<String> listArgument = Collections.synchronizedList(new ArrayList<>());
         return fileFinder.getListByData(directoryName, listArgument, data);
     }
 

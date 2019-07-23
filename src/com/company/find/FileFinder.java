@@ -1,9 +1,9 @@
 package com.company.find;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class FileFinder {
-    public ArrayList<String> getListByName(String path, ArrayList<String> res, String name) {
+    public List<String> getListByName(String path, List<String> res, String name) {
         ThreadFinderByName threadFinderByName = new ThreadFinderByName();
         threadFinderByName.setArguments(path, res, name);
         threadFinderByName.start();
@@ -16,11 +16,10 @@ public class FileFinder {
         return res;
     }
 
-    public ArrayList<String> getListByData(String path, ArrayList<String> res, String data) {
+    public List<String> getListByData(String path, List<String> res, String data) {
         ThreadFinderByData threadFinderByData = new ThreadFinderByData();
         threadFinderByData.setArguments(path, res, data);
         threadFinderByData.start();
-
         try {
             threadFinderByData.join();
             res = threadFinderByData.getRes();
