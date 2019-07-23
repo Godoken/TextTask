@@ -3,10 +3,8 @@ package com.company;
 import java.util.ArrayList;
 
 class StringHandler {
-
     ArrayList<String> getArguments(String task) {
         ArrayList<String> arguments = new ArrayList<>();
-
         String taskArg = "";
         String directoryArg = "";
         String nameOrDataArg = "";
