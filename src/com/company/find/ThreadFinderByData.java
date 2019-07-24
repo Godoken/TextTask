@@ -38,7 +38,7 @@ public class ThreadFinderByData extends Thread {
                                     res.add(file.getCanonicalPath());
                                     break;
                                 } else {
-                                    fileLine = "";
+                                    fileLine = fileLine.substring(1);
                                 }
                             } else {
                                 fileLine = fileLine.concat(String.valueOf((char)i));
